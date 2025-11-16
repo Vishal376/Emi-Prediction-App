@@ -6,12 +6,12 @@ import joblib
 st.title("EMI Eligibility Prediction App")
 
 
-clf_model = joblib.load("clf_model.pkl")
-reg_model = joblib.load("emi_reg_model.pkl")
+# clf_model = joblib.load("clf_model.pkl")
+# reg_model = joblib.load("emi_reg_model.pkl")
 
-# # Load both models
-# clf_model = mlflow.pyfunc.load_model("models:/EMI_Classification_Model/3")
-# reg_model = mlflow.pyfunc.load_model("models:/EMI_Regression_Model/3")
+# Load both models
+clf_model = mlflow.pyfunc.load_model("models:/EMI_Classification_Model/3")
+reg_model = mlflow.pyfunc.load_model("models:/EMI_Regression_Model/3")
 
 # User input form
 age = st.number_input("Age", min_value=18, max_value=100, value=30)
@@ -110,9 +110,10 @@ if st.button("Check Eligibility"):
 
     st.subheader("Prediction Result:")
     st.write("**Eligibility:**", eleg_map[pred_class])
-    if pred_class==0 or pred_class==2:
+    if pred_class==1 or pred_class==2:
     #   st.write("**Max EMI Allowed:** ₹", 0)
         pass
     else:
 
       st.write("**Max EMI Allowed:** ₹", int(pred_emi))
+
