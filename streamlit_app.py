@@ -6,7 +6,7 @@ import joblib
 st.title("EMI Eligibility Prediction App")
 
 
-clf_model = joblib.load("emi_clf_model.pkl")
+clf_model = joblib.load("clf_model.pkl")
 reg_model = joblib.load("emi_reg_model.pkl")
 
 # # Load both models
@@ -114,4 +114,5 @@ if st.button("Check Eligibility"):
     #   st.write("**Max EMI Allowed:** ₹", 0)
         pass
     else:
+
       st.write("**Max EMI Allowed:** ₹", int(pred_emi))
