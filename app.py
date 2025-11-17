@@ -1,17 +1,17 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import mlflow.pyfunc
+# import mlflow.pyfunc
 import joblib
 
 st.title("EMI Eligibility Prediction App")
 
-# clf_model = joblib.load("clf_model.pkl")
-# reg_model = joblib.load("emi_reg_model.pkl")
+clf_model = joblib.load("clf_model.pkl")
+reg_model = joblib.load("emi_reg_model.pkl")
 
 # Load both models
-clf_model = mlflow.pyfunc.load_model("models:/EMI_Classification_Model/3")
-reg_model = mlflow.pyfunc.load_model("models:/EMI_Regression_Model/3")
+# clf_model = mlflow.pyfunc.load_model("models:/EMI_Classification_Model/4")
+# reg_model = mlflow.pyfunc.load_model("models:/EMI_Regression_Model/4")
 
 # User input form
 age = st.number_input("Age", min_value=18, max_value=100, value=30)
@@ -115,5 +115,6 @@ if st.button("Check Eligibility"):
         pass
     else:
       st.write("**Max EMI Allowed:** ₹", int(pred_emi))
+
 
 
