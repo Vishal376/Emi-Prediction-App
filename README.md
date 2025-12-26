@@ -92,16 +92,12 @@ Built on **400,000 real-world financial records**, the platform integrates **MLf
 
 ---
 
----
-
 ## 🚀 Outcomes
 - >90% classification accuracy
 - Regression RMSE < 2000 INR
 - Automated loan risk assessment
 - 80% reduction in manual underwriting effort
 - Scalable FinTech-ready ML platform
-
----
 
 ---
 
