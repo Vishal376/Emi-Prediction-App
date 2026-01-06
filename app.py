@@ -22,8 +22,16 @@ st.title("EMI Eligibility Prediction App")
 
 # User inputs
 age = st.number_input("Age", min_value=18, max_value=100, value=30)
-education = st.selectbox("Education Level (0=none,1=High School,2=Graduate,3=Postgraduate)", [0,1,2,3], index=2)
-monthly_salary = st.number_input("Monthly Salary", min_value=0, value=50000)
+education = st.selectbox("Education Level (0=High School,1=Graduate,2=Postgraduate,3=Professional)", [0,1,2,3], index=2)
+
+monthly_salary = st.number_input("Monthly Salary", min_value=0, value=80000)
+bank_balance = st.number_input("Bank Balance", min_value=0, value=200000)
+credit_score = st.number_input("Credit Score", min_value=300, max_value=900, value=780)
+current_emi_amount = st.number_input("Current EMI Amount", min_value=0, value=0)
+requested_amount = st.number_input("Requested Loan Amount", min_value=0, value=200000)
+requested_tenure = st.number_input("Requested Tenure (months)", min_value=1, value=36)
+
+
 years_of_employment = st.number_input("Years of Employment", min_value=0.0, max_value=50.0, value=2.0, step=0.1)
 monthly_rent = st.number_input("Monthly Rent", min_value=0, value=10000)
 family_size = st.number_input("Family Size", min_value=1, value=3)
@@ -33,12 +41,12 @@ college_fees = st.number_input("College Fees", min_value=0, value=0)
 travel_expenses = st.number_input("Travel Expenses", min_value=0, value=2000)
 groceries_utilities = st.number_input("Groceries / Utilities", min_value=0, value=5000)
 other_monthly_expenses = st.number_input("Other Monthly Expenses", min_value=0, value=1000)
-current_emi_amount = st.number_input("Current EMI Amount", min_value=0, value=0)
-credit_score = st.number_input("Credit Score", min_value=300, max_value=900, value=700)
-bank_balance = st.number_input("Bank Balance", min_value=0, value=10000)
+
+
+
 emergency_fund = st.number_input("Emergency Fund", min_value=0, value=5000)
-requested_amount = st.number_input("Requested Loan Amount", min_value=0, value=50000)
-requested_tenure = st.number_input("Requested Tenure (months)", min_value=1, value=12)
+
+
 
 gender = st.selectbox("Gender", ["Male","Female"])
 marital_status = st.selectbox("Marital Status", ["Single","Married"])
@@ -107,13 +115,21 @@ df[numerical_cols_c] = scaler_c.transform(df[numerical_cols_c])
 # Predict
 # -----------------------------
 if st.button("Check Eligibility"):
-    pred_class = clf_model.predict(df)[0]
+    # pred_class = clf_model.predict(df)[0]
     pred_emi = reg_model.predict(df)[0]
 
     st.subheader("Prediction Result:")
-    st.write("**Eligibility:**", eleg_map[pred_class])
+    # st.write("**Eligibility:**", eleg_map[pred_class])
+    proba = clf_model.predict_proba(df)[0]
+
+    st.markdown("**Class Probabilities:**")
     
-    if pred_class != 0:  # Not eligible or High risk
-        st.write("**Max EMI Allowed:** ₹ 0")
-    else:
-        st.write("**Max EMI Allowed:** ₹", int(pred_emi))
+    st.write(f"Eligible : {proba[0]:.3f}")
+    st.write(f"High Risk : {proba[1]:.3f}")
+    st.write(f"Not Eligible : {proba[2]:.3f}")
+
+    st.write("**Max EMI Allowed:** ₹", int(pred_emi))
+    # if pred_class != 0:  # Not eligible or High risk
+    #     st.write("**Max EMI Allowed:** ₹ 0")
+    # else:
+    #     st.write("**Max EMI Allowed:** ₹", int(pred_emi))
