@@ -8,22 +8,22 @@ from mlflow.tracking import MlflowClient
 
 
 
-client = MlflowClient()
+# client = MlflowClient()
 
 
-client.set_registered_model_alias(
-    name="EMI_Classification_Model",
-    alias="best",
-    version="3"
-)
+# client.set_registered_model_alias(
+#     name="EMI_Classification_Model",
+#     alias="best",
+#     version="3"
+# )
 
-client.set_registered_model_alias(
-    name="XGB_Regression_Model",
-    alias="best",
-    version="1"
-)
+# client.set_registered_model_alias(
+#     name="XGB_Regression_Model",
+#     alias="best",
+#     version="1"
+# )
 
-mlflow.set_tracking_uri("file://./mlruns_new")
+mlflow.set_tracking_uri("file://./mlruns")
 st.title("EMI Eligibility Prediction App")
 
 # clf_model = joblib.load("clf_model.pkl")
@@ -135,5 +135,6 @@ if st.button("Check Eligibility"):
         pass
     else:
       st.write("**Max EMI Allowed:** ₹", int(pred_emi))
+
 
 
