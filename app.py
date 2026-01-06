@@ -1,9 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import mlflow.pyfunc
 import joblib
-import mlflow
 
 st.title("EMI Eligibility Prediction App")
 
@@ -113,6 +111,7 @@ if st.button("Check Eligibility"):
         pass
     else:
       st.write("**Max EMI Allowed:** ₹", int(pred_emi))
+
 
 
 
