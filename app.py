@@ -4,7 +4,7 @@ import numpy as np
 import mlflow.pyfunc
 import joblib
 import mlflow
-from mlflow.tracking import MlflowClient
+# from mlflow.tracking import MlflowClient
 
 
 
@@ -30,8 +30,8 @@ clf_model = joblib.load("clf_model.pkl")
 reg_model = joblib.load("reg_model.pkl")
 
 # Load both models
-clf_model = mlflow.pyfunc.load_model("models:/EMI_Classification_Model@best")
-reg_model = mlflow.pyfunc.load_model("models:/XGB_Regression_Model@best")
+# clf_model = mlflow.pyfunc.load_model("models:/EMI_Classification_Model@best")
+# reg_model = mlflow.pyfunc.load_model("models:/XGB_Regression_Model@best")
 
 # User input form
 age = st.number_input("Age", min_value=18, max_value=100, value=30)
@@ -135,6 +135,7 @@ if st.button("Check Eligibility"):
         pass
     else:
       st.write("**Max EMI Allowed:** ₹", int(pred_emi))
+
 
 
 
